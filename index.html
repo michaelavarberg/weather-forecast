@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Weather Forecast</title>
+  </head>
+
+  <body>
+    <header id="header" class="text-center p-3">
+      <h1>Weather Dashboard</h1>
+    </header>
+
+    <main class="container w-100 d-flex">
+      <!-- Right side -->
+      <div id="city-search-box" class="container d-flex flex-column col-3">
+        <form action="">
+          <label for="city-text-search">Search for a City:</label>
+          <div class="input-group mb-3" id="city-text-search">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="City Name"
+              aria-label="City"
+              aria-describedby="button-addon2"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="button-addon2"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+        <div id="previous-list" class="container d-flex flex-column">
+          <button type="button" class="btn btn-secondary btn-sm m-1">
+            Example
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm m-1">
+            Example
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm m-1">
+            Example
+          </button>
+        </div>
+      </div>
+      <!-- Left side -->
+      <div id="data-display-box" class="container d-flex col-9 flex-column m-3">
+        <div class="card">
+          <div class="card-header">
+            <h2>Quote</h2>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>A well-known quote, contained in a blockquote element.</p>
+              <footer class="blockquote-footer">
+                Someone famous in <cite title="Source Title">Source Title</cite>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+        <div id="forecast-cards-box" class="m-3">
+          <h2>5-Day Forecast</h2>
+          <div
+            id="cards"
+            class="container d-flex flex-wrap justify-content-center"
+          >
+            <div class="card col-12 col-m-4 col-lg-2 m-2">
+              <div class="card-body" id="day1">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+            <div class="card col-12 col-m-4 col-lg-2 m-2">
+              <div class="card-body" id="day2">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+            <div class="card col-12 col-m-4 col-lg-2 m-2">
+              <div class="card-body" id="day3">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+            <div class="card col-12 col-m-4 col-lg-2 m-2">
+              <div class="card-body" id="day4">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+            <div class="card col-12 col-m-4 col-lg-2 m-2">
+              <div class="card-body" id="day5">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
