@@ -42,7 +42,7 @@ var newDay = {
 };
 
 var requestUrl1 =
-  "https://api.weatherbit.io/v2.0/current?key=e573014323c743afa8705c5a7cf4e3b9&city=";
+  "https://api.weatherbit.io/v2.0/current?key=e573014323c743afa8705c5a7cf4e3b9&city=Denver";
 var requestUrl2 =
   "https://api.weatherbit.io/v2.0/forecast/daily?key=e573014323c743afa8705c5a7cf4e3b9&city=Denver";
 
@@ -70,7 +70,8 @@ function getFutureWeather(url) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      for (i = 0; i < 5; i++) {
+      for (i = 1; i < 6; i++) {
+        console.log(data);
         var array = [];
         console.log(i);
         array.push(data.data[i].weather.icon);
@@ -101,8 +102,23 @@ function nth(d) {
   }
 }
 
-function displayCurrentWeather(anyArray) {
-  //displays current date on page
+// function displayCurrentWeather(anyArray) {
+//   //displays current date on page
+//   $("#today-date").text(day + ", " + month + " " + date + nth(date));
+//   date.text = Date.today;
+//   //Updates current weather information - maybe make this dynamically create cards?
+//   currentIcon.text(anyArray[5].icon);
+//   currentTemp.text("Temperature: " + anyArray[5].temp + " degrees (C)");
+//   currentHum.text("Humidity: " + anyArray[5].hum + "%");
+//   if (anyArray[5].wind > 1) {
+//     currentWind.text("Wind Speed: " + anyArray[5].wind + " meters per second");
+//   } else {
+//     currentWind.text("Wind Speed: " + anyArray[5].wind + " meter per second");
+//   }
+//   currentUV.text("UV Index: " + anyArray[5].uv);
+// }
+
+function displayWeather(anyArray) {
   $("#today-date").text(day + ", " + month + " " + date + nth(date));
   date.text = Date.today;
   //Updates current weather information - maybe make this dynamically create cards?
@@ -115,38 +131,14 @@ function displayCurrentWeather(anyArray) {
     currentWind.text("Wind Speed: " + anyArray[5].wind + " meter per second");
   }
   currentUV.text("UV Index: " + anyArray[5].uv);
-}
-
-function displayFutureWeather(anyArray) {
   for (i = 1; i < 6; i++) {
     var card_list_id = ("#card" + i + "List").toString();
-    var list = $(card_list_id);
-    console.log(list);
-
-    var card_id = ("card" + i).toString();
-    var cardDate = $(card_id);
-    var date = $("<h5>");
-    var icon = $("<li>");
-    var temp = $("<li>");
-    var humid = $("<li>");
-    var wind = $("<li>");
-    var uv = $("<li>");
-
-    date = anyArray[i].date;
-    icon = anyArray[i].icon;
-    temp = anyArray[i].temp;
-    humid = anyArray[i].hum;
-    wind = anyArray[i].wind;
-    uv = anyArray[i].uv;
-
-    console.log(card_list_id);
-    list.append(icon);
-    list.append(temp);
-    list.append(humid);
-    list.append(wind);
-    list.append(uv);
-    cardDate.text(date);
-    console.log(cardDate);
+    $(card_list_id).append($("<li>" + anyArray[i].date + "</li>"));
+    $(card_list_id).append($("<li>" + anyArray[i].icon + "</li>"));
+    $(card_list_id).append($("<li>" + anyArray[i].temp + "</li>"));
+    $(card_list_id).append($("<li>" + anyArray[i].hum + "</li>"));
+    $(card_list_id).append($("<li>" + anyArray[i].wind + "</li>"));
+    $(card_list_id).append($("<li>" + anyArray[i].uv + "</li>"));
   }
 }
 // console.log(data.data[0].wind_cdir);
@@ -165,8 +157,8 @@ function storeDay(anyArray) {
   }
   console.log(thisCity);
   if (thisCity.length === 6) {
-    displayCurrentWeather(thisCity);
-    displayFutureWeather(thisCity);
+    console.log(anyArray);
+    displayWeather(thisCity);
     return;
   }
   newDay.icon = anyArray[0];
