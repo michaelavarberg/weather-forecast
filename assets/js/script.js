@@ -80,6 +80,7 @@ function getFutureWeather(url, url2) {
         array.push(data.data[i].valid_date);
         array.push(data.city_name);
         storeDay(array);
+        console.log("getting Future Weather");
       }
       getCurrentWeather(url2);
     });
@@ -99,13 +100,14 @@ function nth(d) {
 }
 
 function displayWeather(anyArray) {
+  console.log("displaying weather");
   var iconUrl = "https://www.weatherbit.io/static/img/icons/"; //t01d.png
   //anyArray is an array of 6 objects. LAST is current oops.
   $("#today-date").text(day + ", " + month + " " + date + nth(date));
   date.text = Date.today;
   //Updates current weather information - maybe make this dynamically create cards?
   currentIcon.attr("src", iconUrl + anyArray[5].icon + ".png");
-  console.log(currentIcon);
+  currentIcon.attr("style", "display:block");
   currentTemp.text("Temperature: " + anyArray[5].temp + " degrees F");
   currentHum.text("Humidity: " + anyArray[5].hum + "%");
   if (anyArray[5].wind > 1) {
@@ -180,11 +182,6 @@ function storeDay(anyArray) {
     }
   }
 
-  if (thisCity.length === 6) {
-    //How would the length get to 6?
-    displayWeather(thisCity); //Ideally this is checking for the city in storage already and then exiting if it already exists.
-    return; //does this return out of the if statement or out of the function?
-  }
   //These should only run if
   newDay.icon = anyArray[0];
   newDay.temp = anyArray[1];
@@ -196,17 +193,25 @@ function storeDay(anyArray) {
   thisCity.push(newDay);
   console.log(thisCity);
   localStorage.setItem('"' + cityName + '"', JSON.stringify(thisCity));
+  if (thisCity.length === 6) {
+    //How would the length get to 6?
+    displayWeather(thisCity); //Ideally this is checking for the city in storage already and then exiting if it already exists.
+    return; //does this return out of the if statement or out of the function?
+  }
 }
+
 function displayStoredWeather(key) {
-  console.log(key);
+  console.log("displayingStoredWeather");
   storedCity = JSON.parse('"' + key + '"');
   displayWeather(storedCity);
 }
+
 $("#button-addon2").on("click", function (event) {
   event.preventDefault();
   for (i = 1; i < 6; i++) {
     var card_list_id = ("#card" + i + "List").toString();
-    $(card_list_id).children("li").remove();
+
+    $(card_list_id).children().remove();
   }
   var textValue = $(event.target).siblings().val();
   requestUrl2 += textValue;
@@ -219,8 +224,10 @@ $("#button-addon2").on("click", function (event) {
     var newButton = $("<button>" + textValue + "</button>");
     newButton.attr("id", textValue);
     $("#previous-list").append(newButton);
+    console.log(newButton);
     // newButton.on("click", displayStoredWeather(textValue));
   } else {
+    $("#current-city-name").text("Current weather in " + textValue + ":");
     key = JSON.parse(key);
     displayWeather(key);
     console.log("working");
@@ -233,53 +240,3 @@ $("#previous-list").on("click", ".btn", function (event) {
   displayStoredWeather(city);
   console.log("worked");
 });
-//Main issue: if city isn't in the local storage, it never gets to the else statement in storeDay();
-//If it is in storage, it displays twice and only the first four cards
-
-// // JavaScript:
-// const address = fetch("https://jsonplaceholder.typicode.com/users/1")
-//   .then((response) => response.json())
-//   .then((user) => {
-//     return user.address;
-//   });
-// Functions:
-// function init(){
-//     pulls array of objects from local storage and stores in global variable
-//     displays 8 most recent city names on left
-// }
-
-// function getData(name of city string) {
-//     if this string is in the local storage array {
-//         index = index of this item
-//         display(local storage item at index)
-//     } else {
-//         var url = "string start"+"user input city name"
-//         getApi(url)
-//         push new object to local storage array
-//         display(local storage item at index)
-//         }
-// }
-
-// function displayData(index of item in local storage) {
-//     variable.textContent = localStorageArray[i].key;
-//     variable.textContent = localStorageArray[i].key;
-//     variable.textContent = localStorageArray[i].key;
-//     variable.textContent = localStorageArray[i].key;
-// }
-
-// function getApi(request) {
-//   fetch(request)
-//     .then(function (response) {
-//       console.log(response);
-//     .then(function (data) {
-//       console.log(data);
-//     });
-// }
-
-// TODO:
-// Link bootstrap, jQuery, jQuery UI, js file, css override file
-// Create layout with bootstrap and overide css
-// Explore Api
-// Declare any interactive variables in JavaScript
-// Write functions using these variables and the api
-// Bug fixes
