@@ -41,11 +41,6 @@ var newDay = {
   name: "",
 };
 
-// var requestUrl1 =
-//   "https://api.weatherbit.io/v2.0/current?key=e573014323c743afa8705c5a7cf4e3b9&city=";
-// var requestUrl2 =
-//   "https://api.weatherbit.io/v2.0/forecast/daily?key=e573014323c743afa8705c5a7cf4e3b9&city=";
-
 function getCurrentWeather(url) {
   var array = [];
   fetch(url)
@@ -62,8 +57,6 @@ function getCurrentWeather(url) {
       storeDay(array);
     });
 }
-// getCurrentWeather(requestUrl1);
-// getFutureWeather(requestUrl2);
 
 function getFutureWeather(url, url2) {
   fetch(url)
@@ -200,12 +193,6 @@ function storeDay(anyArray) {
   }
 }
 
-function displayStoredWeather(key) {
-  console.log("displayingStoredWeather");
-  storedCity = JSON.parse('"' + key + '"');
-  displayWeather(storedCity);
-}
-
 $("#button-addon2").on("click", function (event) {
   event.preventDefault();
   var requestUrl1 =
@@ -227,7 +214,7 @@ $("#button-addon2").on("click", function (event) {
     getFutureWeather(requestUrl2, requestUrl1);
     $("#current-city-name").text("Current weather in " + textValue + ":");
     var newButton = $("<button>" + textValue + "</button>");
-    newButton.attr("id", textValue);
+    addButtonListener(newButton);
     $("#previous-list").append(newButton);
     console.log(newButton);
     // newButton.on("click", displayStoredWeather(textValue));
@@ -235,13 +222,27 @@ $("#button-addon2").on("click", function (event) {
     $("#current-city-name").text("Current weather in " + textValue + ":");
     key = JSON.parse(key);
     displayWeather(key);
+    var newButton = $("<button>" + textValue + "</button>");
+
+    $("#previous-list").append(newButton);
+    addButtonListener(newButton);
     console.log("working");
   }
 });
 
-$("#previous-list").on("click", ".btn", function (event) {
-  var city = $(event.target).val();
-  city = JSON.parse('"' + city + '"');
-  displayStoredWeather(city);
-  console.log("worked");
-});
+function addButtonListener(buttonName) {
+  buttonName.on("click", function (event) {
+    var city = $(event.target).text();
+    $("#current-city-name").text("Current weather in " + city + ":");
+    for (i = 1; i < 6; i++) {
+      var card_list_id = ("#card" + i + "List").toString();
+
+      $(card_list_id).children().remove();
+    }
+    console.log($(event.target).text());
+
+    var storedArray = localStorage.getItem('"' + city + '"');
+    storedArray = JSON.parse(storedArray);
+    displayWeather(storedArray);
+  });
+}
