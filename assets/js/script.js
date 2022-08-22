@@ -41,10 +41,10 @@ var newDay = {
   name: "",
 };
 
-var requestUrl1 =
-  "https://api.weatherbit.io/v2.0/current?key=e573014323c743afa8705c5a7cf4e3b9&city=";
-var requestUrl2 =
-  "https://api.weatherbit.io/v2.0/forecast/daily?key=e573014323c743afa8705c5a7cf4e3b9&city=";
+// var requestUrl1 =
+//   "https://api.weatherbit.io/v2.0/current?key=e573014323c743afa8705c5a7cf4e3b9&city=";
+// var requestUrl2 =
+//   "https://api.weatherbit.io/v2.0/forecast/daily?key=e573014323c743afa8705c5a7cf4e3b9&city=";
 
 function getCurrentWeather(url) {
   var array = [];
@@ -208,6 +208,11 @@ function displayStoredWeather(key) {
 
 $("#button-addon2").on("click", function (event) {
   event.preventDefault();
+  var requestUrl1 =
+    "https://api.weatherbit.io/v2.0/current?key=e573014323c743afa8705c5a7cf4e3b9&city=";
+
+  var requestUrl2 =
+    "https://api.weatherbit.io/v2.0/forecast/daily?key=e573014323c743afa8705c5a7cf4e3b9&city=";
   for (i = 1; i < 6; i++) {
     var card_list_id = ("#card" + i + "List").toString();
 
